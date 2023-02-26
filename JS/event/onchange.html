@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script type="text/javascript">
+    //1.静态注册
+    function onchangeFun() {
+      alert("选项改变！");
+    }
+
+    //2.动态注册
+    window.onload = function () {
+      var elementById = document.getElementById("select");
+      elementById.onchange = function () {
+        alert("动态注册选项改变！");
+      }
+    }
+
+  </script>
+</head>
+<body>
+请选择：
+<select onchange="onchangeFun();">
+  <option>选项</option>
+  <option>选项1</option>
+  <option>选项2</option>
+  <option>选项3</option>
+</select>
+
+请选择：
+<select id="select">
+  <option>选项</option>
+  <option>选项a</option>
+  <option>选项b</option>
+  <option>选项c</option>
+</select>
+</body>
+</html>

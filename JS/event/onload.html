@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script type="text/javascript">
+    function onloadFun() {
+      alert("牛的");
+    }
+    // onload 事件动态注册。是固定写法
+    window.onload = function () {
+      alert("动态注册!");
+    }
+  </script>
+</head>
+<body>
+<!--静态注册 onload 事件
+onload 事件是浏览器解析完页面之后就会自动触发的事件
+<body onload="onloadFun();">
+-->
+</body>
+</html>
