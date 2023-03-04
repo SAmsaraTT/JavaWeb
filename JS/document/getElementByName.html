@@ -5,15 +5,32 @@
     <title>Title</title>
   <script>
       function checkAll() {
+          //返回多个标签集合
+          var elementsByName = document.getElementsByName("hobby");
+          //checked表示复选框的选中状态
 
+          for (var i = 0; i < elementsByName.length; i++) {
+                elementsByName[i].checked = true;
+          }
       }
 
       function checkNo() {
+          //返回多个标签集合
+          var elementsByName = document.getElementsByName("hobby");
+          //checked表示复选框的选中状态
 
+          for (var i = 0; i < elementsByName.length; i++) {
+              elementsByName[i].checked = false;
+          }
       }
 
       function checkReverse() {
+          var elementsByName = document.getElementsByName("hobby");
+          //checked表示复选框的选中状态
 
+          for (var i = 0; i < elementsByName.length; i++) {
+              elementsByName[i].checked = !elementsByName[i].checked;
+          }
       }
   </script>
 </head>
@@ -23,8 +40,8 @@
   <input type="checkbox" name="hobby" value="java">Java
   <input type="checkbox" name="hobby" value="js">Javascript
   <br/>
-<button onclick="">全选</button>
-<button>全不选</button>
-<button>反选</button>
+<button onclick="checkAll()">全选</button>
+<button onclick="checkNo()">全不选</button>
+<button onclick="checkReverse()">反选</button>
 </body>
 </html>

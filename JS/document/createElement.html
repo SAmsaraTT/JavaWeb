@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            // 现在需要我们使用 js 代码来创建 html
+            var htmlDivElement = document.createElement("div");
+            //htmlDivElement.innerHTML = "国哥，我爱你！";
+            var text = document.createTextNode("国哥，我爱你！");
+            htmlDivElement.appendChild(text);
+            document.body.appendChild(htmlDivElement);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>
