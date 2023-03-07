@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="script/jquery-1.7.2.js"></script>
+    <script type="text/javascript">
+        $(function () {
+          //attr() 不推荐操作checked, readOnly, selected, disabled等
+          //  alert($(":checkbox:first").attr("name"));  //获取
+          //  $(":checkbox:first").attr("name", "abs");  //设置
+
+
+            //prop()只推荐操作checked, readOnly, selected, disabled
+          $(":checkbox").prop("checked", true);
+
+
+          //attr()可以设置自定义属性
+
+            $(":checkbox:first").attr("abc", "abcVal");
+            alert($(":checkbox:first").attr("abc"));
+        });
+    </script>
+</head>
+<body>
+<br/>
+多选：
+<input name="checkbox" type="checkbox" value="checkbox1"/>checkbox1
+<input name="checkbox" type="checkbox" value="checkbox2"/>checkbox2
+<input name="checkbox" type="checkbox" value="checkbox3"/>checkbox3
+</body>
+</html>
