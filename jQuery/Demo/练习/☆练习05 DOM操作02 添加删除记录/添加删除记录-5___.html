@@ -6,9 +6,53 @@
 <link rel="stylesheet" type="text/css" href="styleB/css.css" />
 <script type="text/javascript" src="../../script/jquery-1.7.2.js"></script>
 <script type="text/javascript">
+	$(function () {
+		var deleteFun = function () {
+			var $parent = $(this).parent().parent();
 
-	
-	
+			var text = $parent.find("td:first").text();
+
+			/**
+			 * confirm() js中的确认提示框函数
+			 * 当用户点击确定返回true, 反之返回false
+			 */
+			var b = confirm("是否确定删除" + text + " ?");
+
+			if (b) {
+				$parent.remove();
+			}
+
+			//return false 阻止元素的默认行为
+			return false;
+		}
+
+
+		//给submit按钮绑定单击事件
+		$("#addEmpButton").click(function () {
+			//获取输入框的内容
+			var name = $("#empName").val();
+			var email = $("#email").val();
+			var salary = $("#salary").val();
+
+			//创建一个行标签对象
+			var $1 = $("<tr>\n" +
+					"\t\t\t<td>" + name + "</td>\n" +
+					"\t\t\t<td>" + email + "</td>\n" +
+					"\t\t\t<td>" + salary + "</td>\n" +
+					"\t\t\t<td><a href=\"deleteEmp?id=002\">Delete</a></td>\n" +
+					"\t\t</tr>");
+
+			//添加到表格中
+			$1.appendTo($("#employeeTable"));
+
+			//给添加的行的a标签绑上单击事件
+
+			$1.find("a").click(deleteFun);
+		});
+
+		//给删除的a标签绑定单击事件
+		$("a").click(deleteFun);
+	});
 </script>
 </head>
 <body>

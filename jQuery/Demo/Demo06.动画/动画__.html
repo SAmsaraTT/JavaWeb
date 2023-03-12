@@ -25,33 +25,56 @@
 		$(function(){
 			//显示   show()
 			$("#btn1").click(function(){
-				
+				$("#div1").show(1000, function () {
+					alert("show调用完成！");
+				});
 			});		
 			//隐藏  hide()
 			$("#btn2").click(function(){
-				
+				$("#div1").hide(1000, function () {
+					alert("hide调用完成！");
+				});
 			});	
 			//切换   toggle()
 			$("#btn3").click(function(){
-				
-			});	
-			
+				$("#div1").toggle(1000, function () {
+					alert("toggle调用完成！");
+				});
+			});
+
+			/**
+			 * 递归调用
+			 */
+			// var recursive = function () {
+			// 	$("#div1").toggle(1000, recursive);
+			// }
+			// recursive();
+
+
 			//淡入   fadeIn()
 			$("#btn4").click(function(){
-				
+				$("#div1").fadeIn(2000, function () {
+					alert("fadeIn调用完成！");
+				});
 			});	
 			//淡出  fadeOut()
 			$("#btn5").click(function(){
-				
+				$("#div1").fadeOut(2000, function () {
+					alert("fadeOut调用完成！");
+				});
 			});	
 			
 			//淡化到  fadeTo()
 			$("#btn6").click(function(){
-				
+				$("#div1").fadeTo(2000, 0.5, function () {
+					alert("fadeTo调用完成！");
+				});
 			});	
 			//淡化切换  fadeToggle()
 			$("#btn7").click(function(){
-				
+				$("#div1").fadeToggle(1000, function () {
+					alert("fadeToggle调用完成！");
+				});
 			});	
 		})
 </script>

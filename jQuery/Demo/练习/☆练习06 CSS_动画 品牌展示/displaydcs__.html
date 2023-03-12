@@ -73,7 +73,15 @@ a:hover {
 <script type="text/javascript" src="script/jquery-1.7.2.js"></script>
 <script type="text/javascript">
 	$(function() {
+		//基本的初始状态
+		$("li:gt(5):not(:last)").hide();
 
+		//给功能的按钮绑定单击事件
+		$("div div a").click(function () {
+			alert("test");
+
+			return false;
+		});
 	});
 </script>
 </head>

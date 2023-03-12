@@ -12,13 +12,30 @@
 
 
             //prop()只推荐操作checked, readOnly, selected, disabled
-          $(":checkbox").prop("checked", true);
+          // $(":checkbox").prop("checked", true);
+          //
+          //
+          // //attr()可以设置自定义属性
+          //
+          //   $(":checkbox:first").attr("abc", "abcVal");
+          //   alert($(":checkbox:first").attr("abc"));
+
+            //$("<h1>标题1</h1>").prependTo($("div"));
+            //$("<h1>标题1</h1>").insertAfter($("div"));
+
+            //$("<h1>标题1</h1>").insertBefore($("div"));
+
+            //$("div").replaceWith("<h1>标题1</h1>");
 
 
-          //attr()可以设置自定义属性
+            //$("<h1>标题1</h1>").replaceAll("div");
 
-            $(":checkbox:first").attr("abc", "abcVal");
-            alert($(":checkbox:first").attr("abc"));
+            //$("div").remove();
+
+            $("div").empty();
+
+
+
         });
     </script>
 </head>
@@ -28,5 +45,9 @@
 <input name="checkbox" type="checkbox" value="checkbox1"/>checkbox1
 <input name="checkbox" type="checkbox" value="checkbox2"/>checkbox2
 <input name="checkbox" type="checkbox" value="checkbox3"/>checkbox3
+
+<br/><br/>
+<div>1234</div>
+<div>1234</div>
 </body>
 </html>
