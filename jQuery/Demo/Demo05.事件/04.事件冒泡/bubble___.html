@@ -36,7 +36,15 @@
 		<script type="text/javascript" src="jquery-1.7.2.js"></script>
 		<script type="text/javascript">
 			$(function(){
-				
+				$("#content").click(function () {
+					alert("div");
+				});
+
+				$("span").click(function () {
+					alert("span");
+
+					return false;
+				});
 			})
 		</script>
 	</head>

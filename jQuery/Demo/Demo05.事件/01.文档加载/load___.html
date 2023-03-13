@@ -18,12 +18,22 @@
 	//3、window.onload & $(function(){})
 	//window.onload只可以使用一次
 	//$(function(){})可以使用多次
+
+
+	window.onload = function () {
+		alert("原生")
+	}
+
+	$(function () {
+		alert("jq");
+	});
 </script>
 </head>
 <body>
 	<button>我是按钮</button>
 	
-	<!-- <iframe src="http://www.baidu.com"></iframe> -->
+<!--	 <iframe src="http://www.baidu.com"></iframe>-->
+
 	
 </body>
 </html>

@@ -78,7 +78,26 @@ a:hover {
 
 		//给功能的按钮绑定单击事件
 		$("div div a").click(function () {
-			alert("test");
+			$("li:gt(5):not(:last)").toggle();
+
+			//判断品牌当前品牌是否全部可见
+			var newVar = $("li:gt(5):not(:last)").is(":hidden");
+
+			if (newVar) {
+				$("div div a span").text("显示全部品牌");
+				$("div div").removeClass();
+				$("div div").addClass("showmore");
+
+				//去高亮
+				$("li:contains('明基')").removeClass("promoted");
+			} else {
+				$("div div a span").text("显示精简品牌");
+				$("div div").removeClass();
+				$("div div").addClass("showless");
+
+				//加高亮
+				$("li:contains('明基')").addClass("promoted");
+			}
 
 			return false;
 		});
