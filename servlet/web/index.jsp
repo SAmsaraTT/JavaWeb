@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: 81059
-  Date: 2023/3/15
-  Time: 23:14
+  Date: 2023/3/16
+  Time: 12:51
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,6 +11,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  这是web工程的index.jsp页面
+  $END$
   </body>
 </html>
