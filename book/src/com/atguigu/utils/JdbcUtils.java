@@ -21,7 +21,7 @@ public class JdbcUtils {
     static {
         try {
             Properties properties = new Properties();
-            InputStream resourceAsStream = ClassLoader.getSystemClassLoader().getResourceAsStream("jdbc.properties");
+            InputStream resourceAsStream = JdbcUtils.class.getClassLoader().getResourceAsStream("jdbc.properties");
             properties.load(resourceAsStream);
             dataSource = DruidDataSourceFactory.createDataSource(properties);
         } catch (Exception e) {
