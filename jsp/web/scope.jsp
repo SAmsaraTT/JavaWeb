@@ -24,7 +24,10 @@ request域是否有值：<%=request.getAttribute("key")%><br/>
 session域是否有值：<%=session.getAttribute("key")%><br/>
 application域是否有值：<%=application.getAttribute("key")%><br/>
 <%
-  request.getRequestDispatcher("/scope1.jsp").forward(request, response);
+  //request.getRequestDispatcher("/scope1.jsp").forward(request, response);
 %>
+
+<%--就是请求转发--%>
+<jsp:forward page="/scope1.jsp"></jsp:forward>
 </body>
 </html>
