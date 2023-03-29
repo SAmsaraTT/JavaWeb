@@ -38,6 +38,5 @@ public class LoginServlet extends HttpServlet {
             System.out.println(login);
             req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req, resp);
         }
-
     }
 }
