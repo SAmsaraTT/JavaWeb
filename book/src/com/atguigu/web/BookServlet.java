@@ -38,7 +38,11 @@ public class BookServlet extends BaseServlet{
     }
 
     protected void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Book book = WebUtils.copyParamToBean(req.getParameterMap(), new Book());
 
+        bookService.updateBook(book);
+
+        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=list");
     }
 
     /**
@@ -54,5 +58,21 @@ public class BookServlet extends BaseServlet{
         req.setAttribute("books", books);
 
         req.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(req, resp);
+    }
+
+    /**
+    * @Description: 获取需要修改的图书信息回显
+    * @Param: [req, resp]
+    * @return: void
+    * @Author: hliu
+    * @Date: 2023/3/30
+    */
+    protected void getBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int id = WebUtils.parseInt(req.getParameter("id"), 0);
+
+        Book book = bookService.queryBookById(id);
+        req.setAttribute("book", book);
+
+        req.getRequestDispatcher("/pages/manager/book_edit.jsp").forward(req, resp);
     }
 }

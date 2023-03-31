@@ -8,6 +8,7 @@
 	<%--静态包含head--%>
 	<%@ include file="/pages/common/head.jsp"%>
 	<script type="text/javascript">
+    <%--绑定单击事件--%>
 		$(function () {
 			$("a.deleteClass").click(function () {
 				return confirm("你确定要删除【"+ $(this).parent().parent().find("td:first").text() +"】？");
@@ -41,7 +42,7 @@
 				<td>${book.author}</td>
 				<td>${book.sales}</td>
 				<td>${book.stock}</td>
-				<td><a href="book_edit.jsp">修改</a></td>
+				<td><a href="manager/bookServlet?action=getBook&id=${book.id}">修改</a></td>
 				<td><a class="deleteClass" href="manager/bookServlet?action=delete&id=${book.id}">删除</a></td>
 			</tr>
 			</c:forEach>
