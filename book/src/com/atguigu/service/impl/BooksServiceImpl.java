@@ -4,6 +4,7 @@ import com.atguigu.dao.BaseDao;
 import com.atguigu.dao.BookDao;
 import com.atguigu.dao.impl.BookDaoImpl;
 import com.atguigu.pojo.Book;
+import com.atguigu.pojo.Page;
 import com.atguigu.service.BookService;
 
 import java.util.List;
@@ -39,5 +40,26 @@ public class BooksServiceImpl implements BookService {
     @Override
     public List<Book> queryBooks() {
         return bookDao.queryBooks();
+    }
+
+    @Override
+    public Page<Book> page(int pageNo, int pageSize) {
+        Page<Book> page = new Page<Book>();
+        page.setPageSize(pageSize);
+        Integer pageTotalCount = bookDao.queryForPageTotalCount();
+        page.setPageTotalCount(pageTotalCount);
+
+        Integer pageTotal = pageTotalCount / pageSize;
+        if (pageTotalCount % pageSize > 0) {
+            pageTotal++;
+        }
+        page.setPageTotal(pageTotal);
+        page.setPageNo(pageNo);
+
+        int begin = (page.getPageNo() - 1) * pageSize;
+        List<Book> items = bookDao.queryForPageItems(begin, pageSize);
+        page.setItems(items);
+
+        return page;
     }
 }

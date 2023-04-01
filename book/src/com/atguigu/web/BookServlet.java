@@ -1,6 +1,7 @@
 package com.atguigu.web;
 
 import com.atguigu.pojo.Book;
+import com.atguigu.pojo.Page;
 import com.atguigu.service.BookService;
 import com.atguigu.service.impl.BooksServiceImpl;
 import com.atguigu.utils.WebUtils;
@@ -24,7 +25,7 @@ public class BookServlet extends BaseServlet{
 
         bookService.addBook(book);
 
-        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=list");
+        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=page");
     }
 
     protected void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,7 +35,7 @@ public class BookServlet extends BaseServlet{
 
         bookService.deleteBookById(i);
 
-        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=list");
+        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=page");
     }
 
     protected void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,7 +43,7 @@ public class BookServlet extends BaseServlet{
 
         bookService.updateBook(book);
 
-        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=list");
+        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=page");
     }
 
     /**
@@ -74,5 +75,24 @@ public class BookServlet extends BaseServlet{
         req.setAttribute("book", book);
 
         req.getRequestDispatcher("/pages/manager/book_edit.jsp").forward(req, resp);
+    }
+
+    /**
+    * @Description: 处理分页功能
+    * @Param: [req, resp]
+    * @return: void
+    * @Author: hliu
+    * @Date: 2023/3/31
+    */
+    protected void page(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //1.获取pageNo, pageSize
+        int pageNo = WebUtils.parseInt(req.getParameter("pageNo"), 1);
+        int pageSize = WebUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
+        //2.invoke BookService.page(pageNo, pageSize)
+        Page<Book> page = bookService.page(pageNo, pageSize);
+        //3. store the page in RequestScope
+        req.setAttribute("page", page);
+        //4.request dispatch
+        req.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(req, resp);
     }
 }

@@ -43,4 +43,14 @@ public class BookDaoImplTest {
         List<Book> books = bookDao.queryBooks();
         books.forEach(a -> System.out.println(a));
     }
+
+    @Test
+    public void queryForPageTotalCount() {
+        System.out.println(bookDao.queryForPageTotalCount());
+    }
+
+    @Test
+    public void queryForPageItems() {
+        bookDao.queryForPageItems(8, 4).forEach(System.out::println);
+    }
 }

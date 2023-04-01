@@ -29,4 +29,8 @@ public interface BookDao {
     * @Date: 2023/3/29
     */
     List<Book> queryBooks();
+
+    Integer queryForPageTotalCount();
+
+    List<Book> queryForPageItems(int begin, int pageSize);
 }
