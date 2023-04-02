@@ -21,11 +21,12 @@ import java.util.List;
 public class BookServlet extends BaseServlet{
     BookService bookService = new BooksServiceImpl();
     protected void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int pageNo = WebUtils.parseInt(req.getParameter("pageNo"), 0);
+        pageNo += 1;
+
         Book book = WebUtils.copyParamToBean(req.getParameterMap(), new Book());
-
         bookService.addBook(book);
-
-        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=page");
+        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=page&pageNo=" + pageNo);
     }
 
     protected void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,7 +36,7 @@ public class BookServlet extends BaseServlet{
 
         bookService.deleteBookById(i);
 
-        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=page");
+        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=page&pageNo=" + req.getParameter("pageNo"));
     }
 
     protected void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,7 +44,7 @@ public class BookServlet extends BaseServlet{
 
         bookService.updateBook(book);
 
-        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=page");
+        resp.sendRedirect(req.getContextPath() + "/manager/bookServlet?action=page&pageNo=" + req.getParameter("pageNo"));
     }
 
     /**

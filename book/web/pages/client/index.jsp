@@ -4,63 +4,75 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>图书管理</title>
+<title>书城首页</title>
 	<%--静态包含head--%>
 	<%@ include file="/pages/common/head.jsp"%>
-	<script type="text/javascript">
-    <%--绑定单击事件--%>
-		$(function () {
-			$("a.deleteClass").click(function () {
-				return confirm("你确定要删除【"+ $(this).parent().parent().find("td:first").text() +"】？");
-			});
-		});
-	</script>
 </head>
 <body>
 	
 	<div id="header">
 			<img class="logo_img" alt="" src="static/img/logo.gif" >
-			<span class="wel_word">图书管理系统</span>
-		<%--静态包含 manager管理模块的菜单--%>
-		<%@ include file="/pages/common/manager_menu.jsp"%>
+			<span class="wel_word">网上书城</span>
+			<div>
+				<a href="pages/user/login.jsp">登录</a> |
+				<a href="pages/user/regist.jsp">注册</a> &nbsp;&nbsp;
+				<a href="pages/cart/cart.jsp">购物车</a>
+				<a href="pages/manager/manager.jsp">后台管理</a>
+			</div>
 	</div>
-	
 	<div id="main">
-		<table>
-			<tr>
-				<td>名称</td>
-				<td>价格</td>
-				<td>作者</td>
-				<td>销量</td>
-				<td>库存</td>
-				<td colspan="2">操作</td>
-			</tr>
+		<div id="book">
+			<div class="book_cond">
+				<form action="" method="get">
+					价格：<input id="min" type="text" name="min" value=""> 元 - 
+						<input id="max" type="text" name="max" value=""> 元 
+						<input type="submit" value="查询" />
+				</form>
+			</div>
+			<div style="text-align: center">
+				<span>您的购物车中有3件商品</span>
+				<div>
+					您刚刚将<span style="color: red">时间简史</span>加入到了购物车中
+				</div>
+			</div>
 			<c:forEach items="${requestScope.page.items}" var="book">
-			<tr>
-				<td>${book.name}</td>
-				<td>${book.price}</td>
-				<td>${book.author}</td>
-				<td>${book.sales}</td>
-				<td>${book.stock}</td>
-				<td><a href="manager/bookServlet?action=getBook&id=${book.id}&pageNo=${requestScope.page.pageNo}">修改</a></td>
-				<td><a class="deleteClass" href="manager/bookServlet?action=delete&id=${book.id}&pageNo=${requestScope.page.pageNo}">删除</a></td>
-			</tr>
+			<div class="b_list">
+				<div class="img_div">
+					<img class="book_img" alt="" src="${book.imgPath}" />
+				</div>
+				<div class="book_info">
+					<div class="book_name">
+						<span class="sp1">书名:</span>
+						<span class="sp2">${book.name}</span>
+					</div>
+					<div class="book_author">
+						<span class="sp1">作者:</span>
+						<span class="sp2">${book.author}</span>
+					</div>
+					<div class="book_price">
+						<span class="sp1">价格:</span>
+						<span class="sp2">￥${book.price}</span>
+					</div>
+					<div class="book_sales">
+						<span class="sp1">销量:</span>
+						<span class="sp2">${book.sales}</span>
+					</div>
+					<div class="book_amount">
+						<span class="sp1">库存:</span>
+						<span class="sp2">${book.stock}</span>
+					</div>
+					<div class="book_add">
+						<button>加入购物车</button>
+					</div>
+				</div>
+			</div>
 			</c:forEach>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td><a href="pages/manager/book_edit.jsp?pageNo=${requestScope.page.pageTotal}">添加图书</a></td>
-			</tr>	
-		</table>
+		</div>
 
 		<div id="page_nav">
 			<c:if test="${requestScope.page.pageNo > 1}">
-				<a href="manager/bookServlet?action=page&pageNo=1">首页</a>
-				<a href="manager/bookServlet?action=page&pageNo=${requestScope.page.pageNo-1}">上一页</a>
+				<a href="client/bookServlet?action=page&pageNo=1">首页</a>
+				<a href="client/bookServlet?action=page&pageNo=${requestScope.page.pageNo-1}">上一页</a>
 			</c:if>
 
 			<%--页码输出开始--%>
@@ -92,14 +104,14 @@
 					【${i}】
 				</c:if>
 				<c:if test="${i != requestScope.page.pageNo}">
-					<a href="manager/bookServlet?action=page&pageNo=${i}">${i}</a>
+					<a href="client/bookServlet?action=page&pageNo=${i}">${i}</a>
 				</c:if>
 			</c:forEach>
 			<%--页码输出结束--%>
 
 			<c:if test="${requestScope.page.pageNo < requestScope.page.pageTotal}">
-				<a href="manager/bookServlet?action=page&pageNo=${requestScope.page.pageNo+1}">下一页</a>
-				<a href="manager/bookServlet?action=page&pageNo=${requestScope.page.pageTotal}">末页</a>
+				<a href="client/bookServlet?action=page&pageNo=${requestScope.page.pageNo+1}">下一页</a>
+				<a href="client/bookServlet?action=page&pageNo=${requestScope.page.pageTotal}">末页</a>
 			</c:if>
 			共${requestScope.page.pageTotal}页，${requestScope.page.pageTotalCount}条记录 到第<input value="${param.pageNo}" name="pn" id="pn_input"/>页
 			<input id="searchPageBtn" type="button" value="确定">
@@ -111,7 +123,7 @@
 						var pageTotal = ${requestScope.page.pageTotal};
 
 						if (pageNo >= 1 && pageNo <= pageTotal) {
-							location.href = "${pageScope.basePath}manager/bookServlet?action=page&pageNo=" + pageNo;
+							location.href = "${pageScope.basePath}client/bookServlet?action=page&pageNo=" + pageNo;
 						} else {
 							alert("页码不正确！");
 							return false;
@@ -121,9 +133,9 @@
 				});
 			</script>
 		</div>
+	
 	</div>
-
-	<%--静态包含页脚内容--%>
-	<%@ include file="/pages/common/footer.jsp"%>
+<%--静态包含页脚内容--%>
+	<%@include file="/pages/common/footer.jsp"%>
 </body>
 </html>
