@@ -1,4 +1,4 @@
-package com.atguigu.web;
+package com.atguigu.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,8 +23,8 @@ public abstract class BaseServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
         String action = req.getParameter("action");
-
         try {
             Method declaredMethod = this.getClass().getDeclaredMethod(action, HttpServletRequest.class, HttpServletResponse.class);
             declaredMethod.invoke(this, req, resp);

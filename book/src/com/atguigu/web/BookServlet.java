@@ -91,6 +91,8 @@ public class BookServlet extends BaseServlet{
         int pageSize = WebUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
         //2.invoke BookService.page(pageNo, pageSize)
         Page<Book> page = bookService.page(pageNo, pageSize);
+
+        page.setUrl("manager/bookServlet?action=page");
         //3. store the page in RequestScope
         req.setAttribute("page", page);
         //4.request dispatch

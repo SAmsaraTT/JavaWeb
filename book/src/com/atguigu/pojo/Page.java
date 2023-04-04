@@ -23,6 +23,29 @@ public class Page<T> {
     //当前页数据
     private List<T> items;
 
+    //分页条请求地址
+    private String url;
+
+    @Override
+    public String toString() {
+        return "Page{" +
+                "pageNo=" + pageNo +
+                ", pageTotal=" + pageTotal +
+                ", pageSize=" + pageSize +
+                ", pageTotalCount=" + pageTotalCount +
+                ", items=" + items +
+                ", url='" + url + '\'' +
+                '}';
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public Integer getPageNo() {
         return pageNo;
     }
@@ -69,14 +92,4 @@ public class Page<T> {
         this.items = items;
     }
 
-    @Override
-    public String toString() {
-        return "Page{" +
-                "pageNo=" + pageNo +
-                ", pageTotal=" + pageTotal +
-                ", pageSize=" + pageSize +
-                ", pageTotalCount=" + pageTotalCount +
-                ", items=" + items +
-                '}';
-    }
 }

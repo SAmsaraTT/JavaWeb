@@ -34,6 +34,38 @@ public class ClientBookServlet extends BaseServlet {
         int pageSize = WebUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
         //2.invoke BookService.page(pageNo, pageSize)
         Page<Book> page = bookService.page(pageNo, pageSize);
+        page.setUrl("client/bookServlet?action=page");
+        //3. store the page in RequestScope
+        req.setAttribute("page", page);
+        //4.request dispatch
+        req.getRequestDispatcher("/pages/client/index.jsp").forward(req, resp);
+    }
+
+    /**
+    * @Description: 查询对应价格区间的图书
+    * @Param: [req, resp]
+    * @return: void
+    * @Author: hliu
+    * @Date: 2023/4/2
+    */
+    protected void pageByPrice(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //1.获取pageNo, pageSize
+        int pageNo = WebUtils.parseInt(req.getParameter("pageNo"), 1);
+        int pageSize = WebUtils.parseInt(req.getParameter("pageSize"), Page.PAGE_SIZE);
+        int min = WebUtils.parseInt(req.getParameter("min"), 0);
+        int max = WebUtils.parseInt(req.getParameter("max"), Integer.MAX_VALUE);
+
+        //2.invoke BookService.page(pageNo, pageSize)
+        Page<Book> page = bookService.pageByPrice(pageNo, pageSize, min, max);
+        StringBuilder sb = new StringBuilder("client/bookServlet?action=pageByPrice");
+        if (req.getParameter("min") != null) {
+            sb.append("&min=").append(req.getParameter("min"));
+        }
+
+        if (req.getParameter("max") != null) {
+            sb.append("&max=").append(req.getParameter("max"));
+        }
+        page.setUrl(sb.toString());
         //3. store the page in RequestScope
         req.setAttribute("page", page);
         //4.request dispatch

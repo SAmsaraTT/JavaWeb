@@ -47,6 +47,8 @@ public class UserServlet extends BaseServlet {
             req.getRequestDispatcher("/pages/user/login.jsp").forward(req, resp);
         } else {
             System.out.println(login);
+            // 保存用户登录后的信息到session域中
+            req.getSession().setAttribute("user", login);
             req.getRequestDispatcher("/pages/user/login_success.jsp").forward(req, resp);
         }
     }
@@ -87,5 +89,18 @@ public class UserServlet extends BaseServlet {
             System.out.println("验证码[" + code + "]错误");
             req.getRequestDispatcher("/pages/user/regist.jsp").forward(req, resp);
         }
+    }
+
+    /**
+    * @Description: logout the account
+    * @Param: [req, resp]
+    * @return: void
+    * @Author: hliu
+    * @Date: 2023/4/3
+    */
+    protected void logout(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getSession().invalidate();
+
+        resp.sendRedirect(req.getContextPath());
     }
 }
