@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
+
 /**
  * @Description 合并多个Servlet程序
  * @Author hliu
@@ -54,6 +56,11 @@ public class UserServlet extends BaseServlet {
     }
 
     protected void regist(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String token = (String) req.getSession().getAttribute(KAPTCHA_SESSION_KEY);
+
+        //删除验证码
+        req.getSession().removeAttribute(KAPTCHA_SESSION_KEY);
+
         //1.获取请求参数
 
         String username = req.getParameter("username");
@@ -63,8 +70,8 @@ public class UserServlet extends BaseServlet {
 
         User user = WebUtils.copyParamToBean(req.getParameterMap(), new User());
 
-        //2.检查验证码（abcde）
-        if ("abcde".equalsIgnoreCase(code)) {
+        //2.检查验证码
+        if (token != null && token.equalsIgnoreCase(code)) {
             if (userService.existsUsername(username)) {
                 //不可用
                 System.out.println("用户名[" + username + "]已存在");
