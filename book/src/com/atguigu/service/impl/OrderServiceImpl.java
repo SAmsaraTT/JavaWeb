@@ -30,6 +30,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = new Order(orderId, new Date(), cart.getTotalPrice(), 0, userId);
 
         orderDao.saveOrder(order);
+        int i = 12 / 0;
 
         Map<Integer, CartItem> items = cart.getItems();
 

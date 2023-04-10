@@ -4,6 +4,7 @@ import com.atguigu.pojo.Cart;
 import com.atguigu.pojo.User;
 import com.atguigu.service.OrderService;
 import com.atguigu.service.impl.OrderServiceImpl;
+import com.atguigu.utils.JdbcUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,7 @@ public class OrderServlet extends BaseServlet {
         int id = user.getId();
 
         String orderId = orderService.createOrder(cart, id);
+
 //        req.setAttribute("orderId", orderId);
 
         //req.getRequestDispatcher("/pages/cart/checkout.jsp").forward(req, resp);

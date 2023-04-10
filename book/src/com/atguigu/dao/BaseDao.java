@@ -44,8 +44,6 @@ public abstract class BaseDao<T> {
             return queryRunner.update(connection, sql, args);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            JdbcUtils.close(connection);
         }
     }
     
@@ -64,8 +62,6 @@ public abstract class BaseDao<T> {
             return t;
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            JdbcUtils.close(connection);
         }
     }
 
@@ -85,8 +81,6 @@ public abstract class BaseDao<T> {
             return list;
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            JdbcUtils.close(connection);
         }
     }
 
@@ -98,8 +92,6 @@ public abstract class BaseDao<T> {
             return count;
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        } finally {
-            JdbcUtils.close(connection);
         }
 
     }
