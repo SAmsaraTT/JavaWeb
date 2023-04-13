@@ -8,13 +8,24 @@
 		<title>Insert title here</title>
 		<script type="text/javascript">
 			function ajaxRequest() {
-// 				1、我们首先要创建XMLHttpRequest 
+// 				1、我们首先要创建XMLHttpRequest
+				var xmlHttpRequest = new XMLHttpRequest();
 
 // 				2、调用open方法设置请求参数
+				xmlHttpRequest.open("GET", "http://localhost:8080/json_ajax_i18n/ajaxServlet?action=javaScriptAjax", true);
+//				4、在send方法前绑定onreadystatechange事件，处理请求完成后的操作。
+				xmlHttpRequest.onreadystatechange = function () {
+					var parse = JSON.parse(xmlHttpRequest.responseText);
 
+					if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+						document.getElementById("div01").innerHTML = "id: " + parse.id + " name: " + parse.name;
+					}
+				}
 // 				3、调用send方法发送请求
+				xmlHttpRequest.send();
 
-// 				4、在send方法前绑定onreadystatechange事件，处理请求完成后的操作。
+
+
 			}
 		</script>
 	</head>
@@ -22,5 +33,15 @@
 		<button onclick="ajaxRequest()">ajax request</button>
 		<div id="div01">
 		</div>
+	<table border="1">
+		<tr>
+			<td>1.1</td>
+			<td>1.2</td>
+		</tr>
+		<tr>
+			<td>2.1</td>
+			<td>2.2</td>
+		</tr>
+	</table>
 	</body>
 </html>

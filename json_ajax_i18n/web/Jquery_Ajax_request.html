@@ -12,35 +12,66 @@
 				// ajax请求
 				$("#ajaxBtn").click(function(){
 					
-					alert("ajax btn");
+					$.ajax({
+						url:"http://localhost:8080/json_ajax_i18n/ajaxServlet",
+						data:"action=jQueryAjax",
+						type:"GET",
+						success:function (data) {
+							//alert("server return : " + data);
+							//var json = JSON.parse(data);
+							$("#msg").html("ajax id: " + data.id + " name: " + data.name);
+						},
+						dataType: "json"
+					})
 
 				});
 
 				// ajax--get请求
 				$("#getBtn").click(function(){
-
-					alert(" get btn ");
+					var url = "http://localhost:8080/json_ajax_i18n/ajaxServlet";
+					var data = "action=jQueryGet";
+					var callback = function (data) {
+						$("#msg").html("get id: " + data.id + " name: " + data.name);
+					}
+					var type = "json";
+					$.get(url, data, callback, type);
 					
 				});
 				
 				// ajax--post请求
 				$("#postBtn").click(function(){
 					// post请求
-					alert("post btn");
+					var url = "http://localhost:8080/json_ajax_i18n/ajaxServlet";
+					var data = "action=jQueryPost";
+					var callback = function (data) {
+						$("#msg").html("post id: " + data.id + " name: " + data.name);
+					}
+					var type = "json";
+					$.post(url, data, callback, type);
 					
 				});
 
 				// ajax--getJson请求
 				$("#getJSONBtn").click(function(){
 					// 调用
-					alert("getJSON btn");
-
+					var url = "http://localhost:8080/json_ajax_i18n/ajaxServlet";
+					var data = "action=jQueryGetJSON";
+					var callback = function (data) {
+						$("#msg").html("json id: " + data.id + " name: " + data.name);
+					}
+					$.getJSON(url, data, callback);
 				});
 
 				// ajax请求
 				$("#submit").click(function(){
 					// 把参数序列化
-					alert("serialize()");
+					var url = "http://localhost:8080/json_ajax_i18n/ajaxServlet";
+					var data = "action=jQuerySerialize";
+
+					var callback = function (data) {
+						$("#msg").html("serialize id: " + data.id + " name: " + data.name);
+					}
+					$.getJSON(url, data + "&" + $("#form01").serialize(), callback);
 				});
 				
 			});
@@ -52,6 +83,9 @@
 			<button id="getBtn">$.get请求</button>
 			<button id="postBtn">$.post请求</button>
 			<button id="getJSONBtn">$.getJSON请求</button>
+		</div>
+		<div id="msg">
+
 		</div>
 		<br/><br/>
 		<form id="form01" >

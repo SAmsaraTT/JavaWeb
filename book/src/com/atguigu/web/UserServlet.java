@@ -4,6 +4,7 @@ import com.atguigu.pojo.User;
 import com.atguigu.service.UserService;
 import com.atguigu.service.impl.UserServiceImpl;
 import com.atguigu.utils.WebUtils;
+import com.google.gson.Gson;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
@@ -13,6 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 
@@ -109,5 +112,28 @@ public class UserServlet extends BaseServlet {
         req.getSession().invalidate();
 
         resp.sendRedirect(req.getContextPath());
+    }
+
+    /**
+    * @Description: use the ajax to check if username name existed
+    * @Param: [req, resp]
+    * @return: void
+    * @Author: hliu
+    * @Date: 2023/4/12
+    */
+    protected void ajaxExistUsername(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String username = req.getParameter("username");
+
+        boolean existsUsername = userService.existsUsername(username);
+
+        Map<String, Object> ret = new HashMap<>();
+
+        ret.put("existsUsername", existsUsername);
+
+        Gson gson = new Gson();
+
+        String json = gson.toJson(ret);
+
+        resp.getWriter().write(json);
     }
 }

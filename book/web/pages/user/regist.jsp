@@ -8,10 +8,22 @@
 	<%@ include file="/pages/common/head.jsp"%>
 	<script type="text/javascript">
 		$(function () {
+			$("#username").blur(function () {
+				var username = this.value;
+
+				$.getJSON("${pageScope.basePath}userServlet", "action=ajaxExistUsername&username=" + username, function (data) {
+					if (data.existsUsername) {
+						$("span.errorMsg").text("用户名存在！");
+					} else {
+						$("span.errorMsg").text("用户名可用！");
+					}
+				});
+			});
+
 
 			//refresh the token
 			$("#code_img").click(function () {
-				this.src = "${basePath}kaptcha.jpg?d=" + new Date();
+				this.src = "${pageScope.basePath}kaptcha.jpg?d=" + new Date();
 			});
 
 			//给注册绑定单击事件
